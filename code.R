@@ -30,7 +30,12 @@ test <- read.csv(paste0('/home/ubuntu/node_api/upload_script/',file))
 
 test$time <- as.character(test$time)
 
-test$time <- format(strptime(test$time, "%I:%M%p"), format="%Y/%m/%d %H:%M:%S")
+test$time <- substr(test$time,12,18)
+
+test$time <- paste0(test$time,'0')
+
+
+test$time <- format(strptime(test$time, "%H:%M:%S"), format="%Y/%m/%d %H:%M:%S")
 
 test <- test[,-6]
 
