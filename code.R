@@ -38,7 +38,6 @@ test <- test %>% dplyr::group_by(pulocationid, lat,lon,time) %>% dplyr::summaris
 colnames(test) <- c('locationid','lat','lon','time','poops')
 test <- as.data.frame(test)
 
-test <- test[1,]
 ##dbGetQuery(connection,'select * poops first 5')
 
 dbWriteTable(connection, value = test, name = "poops", append = TRUE ) 
