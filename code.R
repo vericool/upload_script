@@ -35,7 +35,7 @@ test$time <- substr(test$time,12,18)
 test$time <- paste0(test$time,'0')
 
 
-test$time <- format(strptime(test$time, "%H:%M:%S"), format="%Y/%m/%d %H:%M:%S")
+test$time <- format(strptime(test$time, "%H:%M:%S"), format="%Y-%m-%d %H:%M:%S")
 
 test <- test[,-6]
 
@@ -45,7 +45,7 @@ test <- as.data.frame(test)
 
 ##dbGetQuery(connection,'select * poops first 5')
 
-dbWriteTable(connection, value = test, name = "poops", append = TRUE ) 
+dbWriteTable(connection, value = test, name = "poops", append = TRUE,row.names = FALSE ) 
 
 
 
