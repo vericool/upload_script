@@ -39,10 +39,14 @@ test$time <- format(strptime(test$time, "%H:%M:%S"), format="%Y-%m-%d %H:%M:%S")
 
 test <- test[,-6]
 
+test$lat <- round(test$lat,3)
+test$lon <- round(test$lon,3)
+
 test <- test %>% dplyr::group_by(pulocationid, lat,lon,time) %>% dplyr::summarise(pus = sum(pus))
 colnames(test) <- c('locationid','lat','lon','time','poops')
 test <- as.data.frame(test)
-test <- test[,-1] %>% add_column(floor = 0, type = 'F') %>% dplyr::select(time, lat,lon, floor, type, poops)
+
+test <- test[,-1] %>% add_column(floor = 0, type = 'F', beer = 'NA', min = 5, diet = 'NA', shape = 'NA'  ) %>% dplyr::select(time, lat,lon, floor, type, poops,beer,min,diet,shape)
 ##dbGetQuery(connection,'select * poops first 5')
 
 dbWriteTable(connection, value = test, name = "poops", append = TRUE,row.names = FALSE ) 
